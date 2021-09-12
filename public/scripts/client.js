@@ -4,37 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-// const createTweetElement = function(tweetObj) {
-//   const userName = tweetObj.user.name;
-//   const userAvatar = tweetObj.user.avatars;
-//   const userHandle = tweetObj.user.handle;
-//   const tweetDate = timeago.format(tweetObj.created_at);
-//   const $tweet = `
-//     <article class="old-tweet">
-//       <header class="old-tweet"> 
-//         <div class="header-left">
-//           <img class="tweet-avatar" src="${userAvatar}"></img>
-//           <span class="tweet-name">${userName}</span>
-//         </div>
-//         <div class="header-right">
-//           <span class="tweet-id">${userHandle}</span>
-//         </div>
-//       </header>
-//       <p class="old-tweet"></p>
-//       <footer class="old-tweet">
-//         <div class="footer-left">
-//           <span class="tweet-date">${tweetDate}</span>
-//         </div>
-//         <div class="footer-right">
-//           <a href=""><i class="fas fa-flag"></i></a>
-//           <a href=""><i class="fas fa-retweet"></i></a>
-//           <a href=""><i class="fas fa-heart"></i></a>
-//         </div>
-//       </footer>
-//     </article>`;
-//   return $tweet;
-// }
-
 const createTweetElement = function(tweetObj) {
   const userAvatar = $('<img>').addClass('tweet-avatar').attr('src', tweetObj.user.avatars);
   const userName = $('<span>').addClass('tweet-name').text(tweetObj.user.name);
@@ -141,17 +110,6 @@ const animateToggle = function() {
   })
 }
 
-// const animateEnable = function() {
-//   $('.write-tweet').hover(function() {
-//     animateToggle();
-//   }, function() {
-//     $('.fa-angle-double-down').stop(true);
-//   })
-//   $('.write-tweet').mouseleave(function() {
-//     $('.fa-angle-double-down').stop(true);
-//   })
-// };
-
 const writeToggle = function() {
   $('.write-tweet').click(function() {
     $('section.new-tweet').slideToggle('slow');
@@ -165,6 +123,22 @@ $(document).ready(function() {
   writeToggle();
 });
 
+
+//// The code that enables the arrow animation
+
+// const animateEnable = function() {
+//   $('.write-tweet').hover(function() {
+//     animateToggle();
+//   }, function() {
+//     $('.fa-angle-double-down').stop(true);
+//   })
+//   $('.write-tweet').mouseleave(function() {
+//     $('.fa-angle-double-down').stop(true);
+//   })
+// };
+
+
+//// User data JSON template for reference
 
 // const data = [
 //   {
@@ -190,3 +164,37 @@ $(document).ready(function() {
 //     "created_at": 1461113959088
 //   }
 // ];
+
+
+//// Pure HTML code Insertion for reference
+
+// const createTweetElement = function(tweetObj) {
+//   const userName = tweetObj.user.name;
+//   const userAvatar = tweetObj.user.avatars;
+//   const userHandle = tweetObj.user.handle;
+//   const tweetDate = timeago.format(tweetObj.created_at);
+//   const $tweet = `
+//     <article class="old-tweet">
+//       <header class="old-tweet"> 
+//         <div class="header-left">
+//           <img class="tweet-avatar" src="${userAvatar}"></img>
+//           <span class="tweet-name">${userName}</span>
+//         </div>
+//         <div class="header-right">
+//           <span class="tweet-id">${userHandle}</span>
+//         </div>
+//       </header>
+//       <p class="old-tweet"></p>
+//       <footer class="old-tweet">
+//         <div class="footer-left">
+//           <span class="tweet-date">${tweetDate}</span>
+//         </div>
+//         <div class="footer-right">
+//           <a href=""><i class="fas fa-flag"></i></a>
+//           <a href=""><i class="fas fa-retweet"></i></a>
+//           <a href=""><i class="fas fa-heart"></i></a>
+//         </div>
+//       </footer>
+//     </article>`;
+//   return $tweet;
+// }

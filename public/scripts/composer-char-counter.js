@@ -12,6 +12,9 @@ $(document).ready(function() {
   });
 });
 
+
+//// Pure Vanilla JavaScript Version for Reference
+
 // document.addEventListener('DOMContentLoaded', function(e) {
 //   console.log('Matrix Loaded');
 //   const inputfield = document.querySelector('#tweet-text');
