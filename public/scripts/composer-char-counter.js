@@ -13,7 +13,7 @@ const wordCounter = function() {
     }
     $('.counter', this).text($counter);
   });
-}
+};
 
 //// Pure Vanilla JavaScript Version for Reference
 

@@ -32,17 +32,17 @@ const createTweetElement = function(tweetObj) {
   const tweetFooter = $('<footer>').addClass('old-tweet').append(footerDivLeft, footerDivRight);
   const tweetArticle = $('<article>').addClass('old-tweet').append(tweetHeader, userTweet, tweetFooter);
   return tweetArticle;
-}
+};
 
 //// Displaying existing tweets
 const renderTweets = function(tweets) {
   // Empting the "tweets-container" element
-  $('.tweets-container').empty(); 
+  $('.tweets-container').empty();
   // Populating the tweet list
   for (const tweet of tweets) {
-    $('.tweets-container').prepend(createTweetElement(tweet)); 
-  }  
-}
+    $('.tweets-container').prepend(createTweetElement(tweet));
+  }
+};
 
 //// Tweet Submission
 const tweetSubmit = function() {
@@ -78,8 +78,8 @@ const tweetSubmit = function() {
             $('.new-tweet .counter').text(140);
             // Updates the list of tweets
             renderTweets(data);
-          })
-      })
+          });
+      });
 
     //// "Longhand" .ajax for reference
     // $.ajax({
@@ -99,14 +99,14 @@ const tweetSubmit = function() {
     //     })
     //   }
     // })
-  })
+  });
 };
 
 //// Loads tweets from database and displays them
 const loadTweets = function() {
   $.get('/tweets', function(data) {
     renderTweets(data);
-  })
+  });
   //// "Longhand" .ajax for reference
   // $.ajax({
   //   url: '/tweets',
@@ -126,8 +126,8 @@ const writeToggle = function() {
   $('.write-tweet').click(function() {
     $('section.new-tweet').slideToggle('slow');
     $('.new-tweet textarea').focus();
-  })
-}
+  });
+};
 
 //// Floating arrows animation on the nav bar
 const animateToggle = function() {
@@ -142,9 +142,9 @@ const animateToggle = function() {
       }, 125, 'linear', function() {
         $('.fa-angle-double-down').attr('style', 'position:relative');
       }).promise().then(requestAnimationFrame(animateToggle));
-    })
-  })
-}
+    });
+  });
+};
 
 //// The code that enables the arrow animation upon a mouse over
 
@@ -187,7 +187,7 @@ const animateToggle = function() {
 // ];
 
 //// Pure HTML code Insertion for reference
-//// NOTE: 
+//// NOTE: .createTextNode needs to be implemented elsewhere on the textarea input and injected later
 
 // const createTweetElement = function(tweetObj) {
 //   const userName = tweetObj.user.name;
@@ -196,7 +196,7 @@ const animateToggle = function() {
 //   const tweetDate = timeago.format(tweetObj.created_at);
 //   const $tweet = `
 //     <article class="old-tweet">
-//       <header class="old-tweet"> 
+//       <header class="old-tweet">
 //         <div class="header-left">
 //           <img class="tweet-avatar" src="${userAvatar}"></img>
 //           <span class="tweet-name">${userName}</span>
@@ -218,4 +218,4 @@ const animateToggle = function() {
 //       </footer>
 //     </article>`;
 //   return $tweet;
-// }
+// };
