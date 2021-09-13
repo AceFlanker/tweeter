@@ -33,3 +33,10 @@ This project was created and published by the original uploader, AceFlanker as p
 - Word count and warning messages to help validate the submission
 
 ## Screenshots
+
+**Desktop version*
+!["Screenshot of Desktop Tweeter"](https://github.com/AceFlanker/tweeter/blob/master/docs/large-screen.png)
+<br>
+
+**Mobile version**
+!["Screenshot of Mobile Tweeter"](https://github.com/AceFlanker/tweeter/blob/master/docs/small-screen.png)
