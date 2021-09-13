@@ -47,7 +47,9 @@ const tweetSubmit = function() {
   $('#tweet-text').submit(function(event) {
     event.preventDefault();
     const $tweetText = $('#tweet-text :input').val();
+    // Error message will be displayed upon an invalid submission
     if ($tweetText.length < 1) {
+      // Error message will not go away if the same error is repeated upon submission
       if ($('.submit-error').text() !== 'Message cannot be empty') {
         $('.submit-error').hide().text('');
       }
@@ -59,14 +61,20 @@ const tweetSubmit = function() {
       }
       return $('.submit-error').text('Message exceeds the maximum characters allowed').slideDown(750);
     }
+    // Any previous error message will go away upon a valid submission
     $('.submit-error').hide();
+    // Converts message to JSON format
     const $data = $('#tweet-text :input').serialize();
+    // POST submission
     $.post('/tweets', $data)
       .done(function() {
+        // Empting the textarea input field
         $('#tweet-text textarea').val('');
         $.get('/tweets')
           .done(function(data) {
+            // Word counter resets
             $('.new-tweet .counter').text(140);
+            // Updates the list of tweets
             renderTweets(data);
           })
       })
@@ -92,25 +100,34 @@ const tweetSubmit = function() {
   })
 };
 
-const updateTweet = function(data) {
-  const tweetSorted = data.sort((a, b) => {
-    return b.created_at - a.created_at;
-  });
-  $('.tweets-container').prepend(createTweetElement(tweetSorted[0]));
-}
-
+//// Loads tweets from database and displays them
 const loadTweets = function() {
-  $.ajax({
-    url: '/tweets',
-    type: 'get',
-    dataType: 'json',
-    success: function(data) {
-      renderTweets(data);
-    }
+  $.get('/tweets', function(data) {
+    renderTweets(data);
   })
+  //// "Longhand" .ajax for reference
+  // $.ajax({
+  //   url: '/tweets',
+  //   type: 'get',
+  //   dataType: 'json',
+  //   success: function(data) {
+  //     renderTweets(data);
+  //   }
+  // })
 };
+
+//// Initial injection of tweets into HTML
 loadTweets();
 
+//// The "Write a new tweet" button on the nav bar
+const writeToggle = function() {
+  $('.write-tweet').click(function() {
+    $('section.new-tweet').slideToggle('slow');
+    $('.new-tweet textarea').focus();
+  })
+}
+
+//// Floating arrows animation on the nav bar
 const animateToggle = function() {
   $('.fa-angle-double-down').animate({
     bottom: '0.05em'
@@ -127,17 +144,8 @@ const animateToggle = function() {
   })
 }
 
-const writeToggle = function() {
-  $('.write-tweet').click(function() {
-    $('section.new-tweet').slideToggle('slow');
-    $('.new-tweet textarea').focus();
-  })
-}
 
-
-
-
-//// The code that enables the arrow animation
+//// The code that enables the arrow animation upon a mouse over
 
 // const animateEnable = function() {
 //   $('.write-tweet').hover(function() {
@@ -149,7 +157,6 @@ const writeToggle = function() {
 //     $('.fa-angle-double-down').stop(true);
 //   })
 // };
-
 
 //// User data JSON template for reference
 
@@ -177,7 +184,6 @@ const writeToggle = function() {
 //     "created_at": 1461113959088
 //   }
 // ];
-
 
 //// Pure HTML code Insertion for reference
 //// NOTE: 
