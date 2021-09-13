@@ -1,10 +1,7 @@
-
- /* 01 <section> */
 .tweets-container {
   box-sizing: border-box;
 }
 
- /* 02a <article> */
 article.old-tweet {
   display: flex;
   flex-direction: column;
@@ -17,7 +14,6 @@ article.old-tweet:hover {
   box-shadow: 3px 4px 8px 2px #a6a6a6;
 }
 
-/* 03 <header> */
 header.old-tweet {
   display: flex;
   flex-direction: row;
@@ -26,7 +22,6 @@ header.old-tweet {
   color: grey;
 }
 
-/* 04 <img> */
 img.tweet-avatar {
   max-width: 25%;
 }
