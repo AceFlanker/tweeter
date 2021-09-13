@@ -3,7 +3,13 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+$(function() {
+  tweetSubmit();
+  animateToggle();
+  writeToggle();
+});
 
+//// HTML Insertion
 const createTweetElement = function(tweetObj) {
   const userAvatar = $('<img>').addClass('tweet-avatar').attr('src', tweetObj.user.avatars);
   const userName = $('<span>').addClass('tweet-name').text(tweetObj.user.name);
@@ -26,16 +32,17 @@ const createTweetElement = function(tweetObj) {
   return tweetArticle;
 }
 
-
+//// Displaying existing tweets
 const renderTweets = function(tweets) {
-  const tweetSorted = tweets.sort((a, b) => {
-    return b.created_at - a.created_at;
-  }) 
-  for (const tweet of tweetSorted) {
-    $('.tweets-container').append(createTweetElement(tweet)); 
+  // Empting the "tweets-container" element
+  $('.tweets-container').empty(); 
+  // Populating the tweet list
+  for (const tweet of tweets) {
+    $('.tweets-container').prepend(createTweetElement(tweet)); 
   }  
 }
 
+//// Tweet Submission
 const tweetSubmit = function() {
   $('#tweet-text').submit(function(event) {
     event.preventDefault();
@@ -52,26 +59,36 @@ const tweetSubmit = function() {
       }
       return $('.submit-error').text('Message exceeds the maximum characters allowed').slideDown(750);
     }
-    // $('.submit-error').attr('style', 'display:none').text('');
     $('.submit-error').hide();
     const $data = $('#tweet-text :input').serialize();
-    $.ajax({
-      url: '/tweets',
-      type: 'post',
-      data: $data,
-      success: function() {
-        $('#tweet-text textarea').val('')
-        $.ajax({
-          url: '/tweets',
-          type: 'get',
-          dataType: 'json',
-          success: function(data) {
+    $.post('/tweets', $data)
+      .done(function() {
+        $('#tweet-text textarea').val('');
+        $.get('/tweets')
+          .done(function(data) {
             $('.new-tweet .counter').text(140);
-            updateTweet(data);
-          }
-        })
-      }
-    })
+            renderTweets(data);
+          })
+      })
+
+    //// "Longhand" .ajax for reference
+    // $.ajax({
+    //   url: '/tweets',
+    //   type: 'post',
+    //   data: $data,
+    //   success: function() {
+    //     $('#tweet-text textarea').val('')
+    //     $.ajax({
+    //       url: '/tweets',
+    //       type: 'get',
+    //       dataType: 'json',
+    //       success: function(data) {
+    //         $('.new-tweet .counter').text(140);
+    //         renderTweets(data);
+    //       }
+    //     })
+    //   }
+    // })
   })
 };
 
@@ -117,11 +134,7 @@ const writeToggle = function() {
   })
 }
 
-$(document).ready(function() {
-  tweetSubmit();
-  animateToggle();
-  writeToggle();
-});
+
 
 
 //// The code that enables the arrow animation
@@ -167,6 +180,7 @@ $(document).ready(function() {
 
 
 //// Pure HTML code Insertion for reference
+//// NOTE: 
 
 // const createTweetElement = function(tweetObj) {
 //   const userName = tweetObj.user.name;
