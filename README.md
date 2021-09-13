@@ -34,7 +34,7 @@ This project was created and published by the original uploader, AceFlanker as p
 
 ## Screenshots
 
-**Desktop version*
+**Desktop version**
 !["Screenshot of Desktop Tweeter"](https://github.com/AceFlanker/tweeter/blob/master/docs/large-screen.png)
 <br>
 
