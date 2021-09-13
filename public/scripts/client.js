@@ -3,6 +3,8 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+
+//// Registering event listener functions once the HTML is loaded
 $(function() {
   tweetSubmit();
   animateToggle();
@@ -143,7 +145,6 @@ const animateToggle = function() {
     })
   })
 }
-
 
 //// The code that enables the arrow animation upon a mouse over
 
